@@ -22,12 +22,21 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (!$user) {
-            return response()->json(['error' => 'Bad username or password!'], 401);
+            return response()->json(['error' => 'Bad username or password!'], 400);
+        }
+
+        // Check if user is locked
+        if (!$user->active) {
+            return response()->json(['error' => 'Account locked.'], 403);
         }
 
         // validate the user password with the one in the database
         if (Hash::check($request->password, $user->password)) {
-            // valid 
+
+            // valid password - reset bad attempts
+            $user->loginAttempts = 0;
+            $user->save();
+
             return response()->json([
                 'token' => $this->GenerateJwt($user),
                 'type' => 'bearer',
@@ -35,7 +44,21 @@ class AuthController extends Controller
             ]);
         }
         else {
-            return response()->json(['error' => 'Bad username or password!'], 401);
+            // check if user has 3 bad login attempts
+            if ($user->loginAttempts >= 3) {
+                // Lock user
+                $user->active = false;
+                $user->save();
+
+                return response()->json(['error' => 'Too many bad attempts. User has been locked.'], 403);
+            }
+            else {
+                // increment bad attempts and response with a bad request
+                $user->loginAttempts = $user->loginAttempts + 1;
+                $user->save();
+
+                return response()->json(['error' => 'Bad username or password!'], 400);
+            }
         }
     }
 

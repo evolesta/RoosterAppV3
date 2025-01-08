@@ -58,7 +58,7 @@ class ProfileController extends Controller
             $user->password = Hash::make($request->newPassword);
             $user->save();
 
-            return response()->jsom(['Result' => 'OK']);
+            return response()->json(['Result' => 'OK']);
         }
         else {
             // Invalid current password

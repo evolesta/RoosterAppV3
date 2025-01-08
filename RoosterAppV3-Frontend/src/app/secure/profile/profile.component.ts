@@ -52,11 +52,11 @@ export class ProfileComponent implements OnInit {
 
   submitPassword(): void {
     this.http.put('/profile/password', this.passwordForm.value).subscribe({
-      next(resp) {
+      next: (resp) => {
           this.alert = true;
           this.alertText = 'Wachtwoord is succesvol gewijzigd.';
       },
-      error(error) {
+      error: (error) => {
         this.alert = true;
         this.alertText = "Fout: " + error.error;
         this.alertType = "danger";

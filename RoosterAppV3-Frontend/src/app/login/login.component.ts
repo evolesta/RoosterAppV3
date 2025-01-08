@@ -35,8 +35,11 @@ export class LoginComponent {
       },
       error: (error) => {
         this.error = true;
-        if (error.status = 401) {
+        if (error.status == 400) {
           this.errorText = 'Inlognaam en/of wachtwoord onjuist.'
+        }
+        else if (error.status == 403) {
+          this.errorText = "Account is geblokkeerd. Raadpleeg een beheerder.";
         }
         else {
           this.errorText = 'Fout opgetreden in API: ' + error.message
