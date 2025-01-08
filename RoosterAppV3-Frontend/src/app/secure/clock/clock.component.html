@@ -1,0 +1,19 @@
+<h1>Welkom!</h1>
+
+<form [formGroup]="clockForm">
+    <div class="mb-3">
+        <label for="date" class="form-label">Datum</label>
+        <input type="date" class="form-control" id="date" formControlName="date">
+    </div>
+    <div class="mb-3">
+        <label for="start" class="form-label">Starttijd</label>
+        <input type="time" class="form-control" id="start" formControlName="start">
+    </div>
+    <div class="mb-3">
+        <label for="end" class="form-label">Eindtijd</label>
+        <input type="time" class="form-control" id="end">
+    </div>
+    <div class="d-grid gap-2">
+        <button class="btn btn-success" type="submit"><i class="bi bi-play-fill"></i> Start</button>
+    </div>
+</form>

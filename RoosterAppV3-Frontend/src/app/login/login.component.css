@@ -1,0 +1,12 @@
+.card {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    padding: 25px;
+}
+
+.header {
+    text-align: center;
+    margin-top: 50px;
+}

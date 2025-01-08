@@ -1,0 +1,24 @@
+<div class="header">
+    <h1 class="display-2">RoosterApp V3</h1>
+</div>
+
+<div class="card">
+    <h1>Inloggen</h1>
+
+    <ngb-alert *ngIf="error" [dismissible]="false" type="danger">
+        {{errorText}}
+    </ngb-alert>
+
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <div class="mb-3">
+            <label for="email" class="form-label">E-mailadres</label>
+            <input type="email" class="form-control" id="email" formControlName="email">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Wachtwoord</label>
+            <input type="password" class="form-control" id="password" formControlName="password">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Inloggen</button>
+    </form>
+</div>

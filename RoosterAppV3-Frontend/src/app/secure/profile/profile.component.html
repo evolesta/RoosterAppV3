@@ -1,0 +1,52 @@
+<h1>Instellingen</h1>
+
+<ngb-alert *ngIf="alert" type="{{alertType}}" [dismissible]="false">
+	{{alertText}}
+</ngb-alert>
+
+<form [formGroup]="profileForm" (ngSubmit)="submitProfile()">
+    <ul ngbNav #nav="ngbNav" class="nav-tabs">
+        <li ngbNavItem>
+          <button ngbNavLink>Algemeen</button>
+          <ng-template ngbNavContent>
+            <div class="mb-3">
+                <label for="name" class="form-label">Naam</label>
+                <input class="form-control" id="name" formControlName="name">
+            </div>
+            <button type="submit" class="btn btn-primary">Opslaan</button>
+          </ng-template>
+        </li>
+        <li ngbNavItem>
+          <button ngbNavLink>Werkuren</button>
+          <ng-template ngbNavContent>
+            <div class="mb-3">
+                <label for="workHours" class="form-label">Werkuren</label>
+                <input type="time" class="form-control" id="workHours" formControlName="workHours">
+            </div>
+            <button type="submit" class="btn btn-primary">Opslaan</button>
+          </ng-template>
+        </li>
+        <li ngbNavItem>
+            <button ngbNavLink>Wachtwoord</button>
+            <ng-template ngbNavContent>
+                <p>Wijzig je wachtwoord. Voer het huidige- en tweemaal het nieuwe wachtwoord in.</p>
+                <form [formGroup]="passwordForm" (ngSubmit)="submitPassword()">
+                    <div class="mb-3">
+                        <label for="oldPassword" class="form-label">Huidige wachtwoord</label>
+                        <input type="password" class="form-control" id="oldPassword" formControlName="oldPassword">
+                    </div>
+                    <div class="mb-3">
+                        <label for="newPassword" class="form-label">Nieuwe wachtwoord</label>
+                        <input type="password" class="form-control" id="newPassword" formControlName="newPassword">
+                    </div>
+                    <div class="mb-3">
+                        <label for="newPassword2" class="form-label">Nieuwe wachtwoord (herhalen)</label>
+                        <input type="password" class="form-control" id="newPassword2" formControlName="newPassword2">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Opslaan</button>
+                </form>
+            </ng-template>
+          </li>
+      </ul>
+      <div [ngbNavOutlet]="nav"></div>
+</form>

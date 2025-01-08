@@ -26,6 +26,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' =>  'required|email',
+            'workHours' => 'required'
         ]);
 
         $user = new User();
@@ -33,6 +34,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make(Str::random(32));
         $user->role = 0;
+        $user->workHours = $request->workHours;
         $user->save();
 
         return response()->json($user);
@@ -55,12 +57,15 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' =>  'required|email',
+            'workhours' => 'required',
+            'role' => 'role'
         ]);
 
         $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = Hash::make(Str::random(32));
+        $user->role = $request->role;
+        $user->workHours = $request->workHours;
         $user->save();
 
         return response()->json($user);
